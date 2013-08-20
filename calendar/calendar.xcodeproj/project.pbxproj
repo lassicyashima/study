@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		084FB53017C3727700C8F053 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 084FB52F17C3727700C8F053 /* Default@2x.png */; };
 		878FE2BE175F414D00B3AE0B /* CalenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 878FE2BD175F414D00B3AE0B /* CalenderViewController.m */; };
-		878FE2C4175F426200B3AE0B /* ClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 878FE2C3175F426200B3AE0B /* ClockViewController.m */; };
-		878FE2C7175F42C200B3AE0B /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 878FE2C6175F42C200B3AE0B /* MapViewController.m */; };
 		879B90111761B75D001F1E87 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 879B90101761B75D001F1E87 /* Default-568h@2x.png */; };
 		879B901D1761BC09001F1E87 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 879B901C1761BC09001F1E87 /* Default@2x.png */; };
 		87DA71FF175C96A2001DB25B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87DA71FE175C96A2001DB25B /* UIKit.framework */; };
@@ -29,10 +27,6 @@
 		084FB52F17C3727700C8F053 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		878FE2BC175F414D00B3AE0B /* CalenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalenderViewController.h; sourceTree = "<group>"; };
 		878FE2BD175F414D00B3AE0B /* CalenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalenderViewController.m; sourceTree = "<group>"; };
-		878FE2C2175F426200B3AE0B /* ClockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClockViewController.h; sourceTree = "<group>"; };
-		878FE2C3175F426200B3AE0B /* ClockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClockViewController.m; sourceTree = "<group>"; };
-		878FE2C5175F42C200B3AE0B /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		878FE2C6175F42C200B3AE0B /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		879B90101761B75D001F1E87 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		879B901C1761BC09001F1E87 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		87DA71FB175C96A2001DB25B /* calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,11 +99,7 @@
 				87DA7216175C96A2001DB25B /* MainStoryboard.storyboard */,
 				878FE2BC175F414D00B3AE0B /* CalenderViewController.h */,
 				878FE2BD175F414D00B3AE0B /* CalenderViewController.m */,
-				878FE2C2175F426200B3AE0B /* ClockViewController.h */,
 				084FB52F17C3727700C8F053 /* Default@2x.png */,
-				878FE2C3175F426200B3AE0B /* ClockViewController.m */,
-				878FE2C5175F42C200B3AE0B /* MapViewController.h */,
-				878FE2C6175F42C200B3AE0B /* MapViewController.m */,
 				87DA7205175C96A2001DB25B /* Supporting Files */,
 			);
 			path = calendar;
@@ -198,8 +188,6 @@
 				87DA720B175C96A2001DB25B /* main.m in Sources */,
 				87DA720F175C96A2001DB25B /* AppDelegate.m in Sources */,
 				878FE2BE175F414D00B3AE0B /* CalenderViewController.m in Sources */,
-				878FE2C4175F426200B3AE0B /* ClockViewController.m in Sources */,
-				878FE2C7175F42C200B3AE0B /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
