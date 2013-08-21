@@ -14,6 +14,7 @@
     NSCalendar *calendar;
     NSDateComponents *dateComp;
 }
+@property (nonatomic, strong) UIPopoverController *popController;
 @end
 
 @implementation CalenderViewController
@@ -26,6 +27,7 @@
     calendar = [NSCalendar currentCalendar];
     dateComp = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
                            fromDate:now];
+
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -78,6 +80,23 @@
     if (day == today) {
         cell.backgroundColor = [UIColor redColor];
     }
+    
+}
+
+- (void)addButtonTouched:(id)sender
+{
+    NSString *storyboardFile = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"UIMainStoryboardFile"];
+    MyPopOverViewController *controller = [[UIStoryboard storyboardWithName:storyboardFile bundle:nil] instantiateViewControllerWithIdentifier:@"MyPopOverView"];
+    controller.delegate = self;
+    self.popController = [[UIPopoverController alloc] initWithContentViewController:controller];
+    [self.popController presentPopoverFromBarButtonItem:sender
+                               permittedArrowDirections:UIPopoverArrowDirectionAny
+                                               animated:YES];
+}
+
+- (void)popOverButtonTouched:(UIButton *)button
+{
+    [self.popController dismissPopoverAnimated:YES];
     
 }
 

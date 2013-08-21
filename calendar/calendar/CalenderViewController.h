@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MyPopOverViewController.h"
 
-@interface CalenderViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource>
+@interface CalenderViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UINavigationBarDelegate , MyPopPverViewDelegate>
+
+- (IBAction)addButtonTouched:(id)sender;
 
 @end
