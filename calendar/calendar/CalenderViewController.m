@@ -104,6 +104,7 @@
                                                    delegate:nil
                                           cancelButtonTitle:@"キャンセル"
                                           otherButtonTitles:@"OK", nil];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
     [alert show];
     
 }
