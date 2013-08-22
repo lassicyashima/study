@@ -8,12 +8,30 @@
 
 #import "CalenderViewController.h"
 
+@interface Today : NSObject
+@property (nonatomic, assign) NSInteger month;
+@property (nonatomic, assign) NSInteger day;
+
+- (BOOL) isTodayWithMonth:(NSInteger)month day:(NSInteger)day;
+
+@end
+
+@implementation Today
+
+- (BOOL)isTodayWithMonth:(NSInteger)month day:(NSInteger)day
+{
+    return (self.month == month && self.day == day);
+}
+
+@end
+
 @interface CalenderViewController ()
 {
-    NSDate *now;
     NSCalendar *calendar;
     NSDateComponents *dateComp;
+    Today *today;
 }
+@property (nonatomic, assign) NSInteger days;
 @property (nonatomic, strong) UIPopoverController *popController;
 @end
 
@@ -23,11 +41,14 @@
 {
     [super viewDidLoad];
     
-    now = [NSDate date];
+    NSDate *now = [NSDate date];
     calendar = [NSCalendar currentCalendar];
     dateComp = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
                            fromDate:now];
-
+    today = [Today new];
+    today.day   = dateComp.day;
+    today.month = dateComp.month;
+    self.days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:now].length;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -42,7 +63,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:now].length;
+    return self.days;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -59,28 +80,18 @@
     cell.textLabel.text = [NSString stringWithFormat:@"%d/%d/%d",
                            dateComp.year,
                            dateComp.month,
-                           day];
-    
-    NSInteger today = dateComp.day;
-    
-    if (day == today) {
-        cell.textLabel.textColor = [UIColor whiteColor];
-    }
-    
+                           day];    
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView
   willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSInteger today = dateComp.day;
-    
     NSInteger day = indexPath.row + 1;
-    
-    if (day == today) {
+    if ([today isTodayWithMonth:[dateComp month] day:day]) {
         cell.backgroundColor = [UIColor redColor];
+        cell.textLabel.textColor = [UIColor whiteColor];
     }
-    
 }
 
 - (void)addButtonTouched:(id)sender
@@ -96,8 +107,13 @@
 
 - (void)popOverButtonTouched:(UIButton *)button
 {
+    NSLog(@"touched button:%@" , button);
     [self.popController dismissPopoverAnimated:YES];
     
+    [dateComp setMonth:button.tag];
+    self.days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:[calendar dateFromComponents:dateComp]].length;
+    [dateComp setDay:rand() % self.days];
+    [self.tableView reloadData];
 }
 
 @end
