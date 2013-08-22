@@ -116,4 +116,31 @@
     [self.tableView reloadData];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    static NSString *cellIdentifier = @"Cell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault
+                                     reuseIdentifier:cellIdentifier];
+    }
+    
+    NSInteger day = indexPath.row + 1;
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%d/%d/%d",
+                           dateComp.year,
+                           dateComp.month,
+                           day];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:cell.textLabel.text
+                                                    message:@"スケジュールを入力してくれい"
+                                                   delegate:nil
+                                          cancelButtonTitle:@"キャンセル"
+                                          otherButtonTitles:@"OK", nil];
+    [alert show];
+    
+}
+
 @end
