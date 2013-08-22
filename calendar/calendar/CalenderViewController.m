@@ -126,14 +126,7 @@
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault
                                      reuseIdentifier:cellIdentifier];
     }
-    
-    NSInteger day = indexPath.row + 1;
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"%d/%d/%d",
-                           dateComp.year,
-                           dateComp.month,
-                           day];
-    
+    NSLog(@"cell touched. section:%d , row:%d" , indexPath.section , indexPath.row);
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:cell.textLabel.text
                                                     message:@"スケジュールを入力してくれい"
                                                    delegate:nil
