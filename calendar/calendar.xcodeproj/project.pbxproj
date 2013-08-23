@@ -11,6 +11,8 @@
 		0817D7C017C4D0930097A5CB /* MyPopOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0817D7BF17C4D0930097A5CB /* MyPopOverViewController.m */; };
 		084FB53017C3727700C8F053 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 084FB52F17C3727700C8F053 /* Default@2x.png */; };
 		089713F917C618E800A814F5 /* InputData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 089713F717C618E800A814F5 /* InputData.xcdatamodeld */; };
+		089713FF17C61C9900A814F5 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 089713FE17C61C9900A814F5 /* Schedule.m */; };
+		0897140117C61CF200A814F5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897140017C61CF200A814F5 /* CoreData.framework */; };
 		878FE2BE175F414D00B3AE0B /* CalenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 878FE2BD175F414D00B3AE0B /* CalenderViewController.m */; };
 		879B90111761B75D001F1E87 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 879B90101761B75D001F1E87 /* Default-568h@2x.png */; };
 		879B901D1761BC09001F1E87 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 879B901C1761BC09001F1E87 /* Default@2x.png */; };
@@ -31,6 +33,9 @@
 		0817D7BF17C4D0930097A5CB /* MyPopOverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPopOverViewController.m; sourceTree = "<group>"; };
 		084FB52F17C3727700C8F053 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		089713F817C618E800A814F5 /* InputData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InputData.xcdatamodel; sourceTree = "<group>"; };
+		089713FD17C61C9900A814F5 /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
+		089713FE17C61C9900A814F5 /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
+		0897140017C61CF200A814F5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		878FE2BC175F414D00B3AE0B /* CalenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalenderViewController.h; sourceTree = "<group>"; };
 		878FE2BD175F414D00B3AE0B /* CalenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalenderViewController.m; sourceTree = "<group>"; };
 		879B90101761B75D001F1E87 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -55,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0897140117C61CF200A814F5 /* CoreData.framework in Frameworks */,
 				87DA7224175C96CA001DB25B /* CoreLocation.framework in Frameworks */,
 				87DA7222175C96BE001DB25B /* MapKit.framework in Frameworks */,
 				87DA71FF175C96A2001DB25B /* UIKit.framework in Frameworks */,
@@ -87,6 +93,7 @@
 		87DA71FD175C96A2001DB25B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0897140017C61CF200A814F5 /* CoreData.framework */,
 				87DA7223175C96CA001DB25B /* CoreLocation.framework */,
 				87DA7221175C96BE001DB25B /* MapKit.framework */,
 				87DA71FE175C96A2001DB25B /* UIKit.framework */,
@@ -107,6 +114,8 @@
 				878FE2BD175F414D00B3AE0B /* CalenderViewController.m */,
 				0817D7BE17C4D0930097A5CB /* MyPopOverViewController.h */,
 				0817D7BF17C4D0930097A5CB /* MyPopOverViewController.m */,
+				089713FD17C61C9900A814F5 /* Schedule.h */,
+				089713FE17C61C9900A814F5 /* Schedule.m */,
 				084FB52F17C3727700C8F053 /* Default@2x.png */,
 				87DA7205175C96A2001DB25B /* Supporting Files */,
 			);
@@ -198,6 +207,7 @@
 				878FE2BE175F414D00B3AE0B /* CalenderViewController.m in Sources */,
 				0817D7C017C4D0930097A5CB /* MyPopOverViewController.m in Sources */,
 				089713F917C618E800A814F5 /* InputData.xcdatamodeld in Sources */,
+				089713FF17C61C9900A814F5 /* Schedule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
