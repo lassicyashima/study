@@ -14,6 +14,7 @@
     NSCalendar *calendar;
     NSDateComponents *dateComp;
 }
+@property NSMutableDictionary *schedule;
 @end
 
 @implementation CalenderViewController
@@ -26,6 +27,7 @@
     calendar = [NSCalendar currentCalendar];
     dateComp = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
                            fromDate:now];
+    self.schedule = @{}.mutableCopy;
 }
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -48,7 +50,7 @@
     static NSString *cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle
                                      reuseIdentifier:cellIdentifier];
     }
     
@@ -58,6 +60,7 @@
                            dateComp.year,
                            dateComp.month,
                            day];
+    cell.detailTextLabel.text = self.schedule[cell.textLabel.text];
     
     NSInteger today = dateComp.day;
     
@@ -88,8 +91,8 @@
     static NSString *cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault
-                                     reuseIdentifier:cellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:cellIdentifier];
     }
     
     NSInteger day = indexPath.row + 1;
@@ -101,12 +104,21 @@
     
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:cell.textLabel.text
                                                     message:@"スケジュールを入力してくれい"
-                                                   delegate:nil
+                                                   delegate:self
                                           cancelButtonTitle:@"キャンセル"
                                           otherButtonTitles:@"OK", nil];
     [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
     [alert show];
     
+}
+
+-(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1){
+        NSLog(@"%@" , [alertView textFieldAtIndex:0].text);
+        self.schedule[alertView.title] = [alertView textFieldAtIndex:0].text;
+    }
+    [self.tableView reloadData];
 }
 
 @end
