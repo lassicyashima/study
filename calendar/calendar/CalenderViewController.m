@@ -43,6 +43,7 @@
 {
     [super viewDidLoad];
     
+    self.title = @"Schedole";
     NSDate *now = [NSDate date];
     calendar = [NSCalendar currentCalendar];
     dateComp = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
