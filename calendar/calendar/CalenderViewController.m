@@ -86,14 +86,7 @@
                            dateComp.year,
                            dateComp.month,
                            day];
-    //Schedule *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.detailTextLabel.text = self.schedule[cell.textLabel.text];
-    
-    NSInteger today = dateComp.day;
-    
-    if (day == today) {
-        cell.textLabel.textColor = [UIColor whiteColor];
-    }
     
     return cell;
 }
@@ -134,22 +127,27 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    // NOT USE.
+//    static NSString *cellIdentifier = @"Cell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+//                                      reuseIdentifier:cellIdentifier];
+//    }
     
-    static NSString *cellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:cellIdentifier];
-    }
+    NSString *str = [NSString stringWithFormat:@"%d/%d/%d",
+                     dateComp.year,
+                     dateComp.month,
+                     indexPath.row + 1];
     NSLog(@"cell touched. section:%d , row:%d" , indexPath.section , indexPath.row);
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:cell.textLabel.text
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str
                                                     message:@"スケジュールを入力してくれい"
                                                    delegate:self
                                           cancelButtonTitle:@"キャンセル"
                                           otherButtonTitles:@"OK", nil];
     [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
     [alert show];
-    
 }
 
 #pragma - Core Data
@@ -176,6 +174,32 @@
     }
 }
 
+- (void)insertNewObjectWithDate:(NSString *)dateString message:(NSString *)message
+{
+    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
+    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
+    Schedule *newSchedule = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+    
+    NSDateFormatter *inputDateFormatter = [[NSDateFormatter alloc] init];
+	[inputDateFormatter setDateFormat:@"yyyy/M/d"];
+	NSDate *inputDate = [inputDateFormatter dateFromString:dateString];
+    
+    // If appropriate, configure the new managed object.
+    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
+    newSchedule.created_time = [NSDate date];
+    newSchedule.date =  inputDate;
+    newSchedule.action = message;
+    
+    // Save the context.
+    NSError *error = nil;
+    if (![context save:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+}
+
 #pragma mark - Fetched results controller
 
 - (NSFetchedResultsController *)fetchedResultsController
@@ -189,10 +213,10 @@
     [fetchRequest setEntity:entity];
     
     // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
+    [fetchRequest setFetchBatchSize:100];
     
     // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"created_time" ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"created_time" ascending:YES];
     NSArray *sortDescriptors = @[sortDescriptor];
     
     [fetchRequest setSortDescriptors:sortDescriptors];
@@ -210,43 +234,6 @@
 	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
 	    abort();
 	}
-    return _fetchedResultsController;
-}
-
-- (NSFetchedResultsController *)fetchedResultsController:(NSDate *)date
-{
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
-    }
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Schedule" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"create_time" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Schedule"];
-    aFetchedResultsController.delegate = self;
-    self.fetchedResultsController = aFetchedResultsController;
-    
-	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-	    abort();
-	}
-    
     return _fetchedResultsController;
 }
 
@@ -255,8 +242,25 @@
     if (buttonIndex == 1){
         NSLog(@"%@" , [alertView textFieldAtIndex:0].text);
         self.schedule[alertView.title] = [alertView textFieldAtIndex:0].text;
+        [self insertNewObjectWithDate:alertView.title message:[alertView textFieldAtIndex:0].text];
+        self.fetchedResultsController = nil;
+        [self setScheduleFromCoreData];
     }
+    NSLog(@"%@" , self.schedule);
     [self.tableView reloadData];
+}
+
+- (void)setScheduleFromCoreData
+{
+    int i = 0;
+    NSDateFormatter *inputDateFormatter = [[NSDateFormatter alloc] init];
+    [inputDateFormatter setDateFormat:@"yyyy/M/d"];
+    for ( Schedule *scheduleData in [self.fetchedResultsController fetchedObjects] ){
+        NSLog(@"index:%d action:%@" ,i ,scheduleData.action);
+        NSString *key = [inputDateFormatter stringFromDate:scheduleData.date];
+        self.schedule[key] = scheduleData.action;
+        i++;
+    }
 }
 
 @end
