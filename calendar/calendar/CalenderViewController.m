@@ -57,6 +57,8 @@
     self.schedule = @{}.mutableCopy;
 }
 
+#pragma mark - TableView Dalegate and DataSouce
+
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     return [NSString stringWithFormat:@"%d月", [dateComp month]];
@@ -74,7 +76,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"Cell";
+    static NSString *cellIdentifier = @"CalendorCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle
@@ -82,12 +84,15 @@
     }
     
     NSInteger day = indexPath.row + 1;
+
+    UILabel *dateLabel   = (UILabel *)[cell viewWithTag:1];
+    UILabel *actionLabel = (UILabel *)[cell viewWithTag:2];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%d/%d/%d",
-                           dateComp.year,
-                           dateComp.month,
-                           day];
-    cell.detailTextLabel.text = self.schedule[cell.textLabel.text];
+    dateLabel.text = [NSString stringWithFormat:@"%d/%d/%d",
+                      dateComp.year,
+                      dateComp.month,
+                      day];
+    actionLabel.text = self.schedule[dateLabel.text];
     
     return cell;
 }
@@ -97,10 +102,79 @@
 {
     NSInteger day = indexPath.row + 1;
     if ([today isTodayWithMonth:[dateComp month] day:day]) {
+        UILabel *dateLabel   = (UILabel *)[cell viewWithTag:1];
+        UILabel *actionLabel = (UILabel *)[cell viewWithTag:2];
+        dateLabel.textColor = [UIColor whiteColor];
+        actionLabel.textColor = [UIColor whiteColor];
         cell.backgroundColor = [UIColor redColor];
-        cell.textLabel.textColor = [UIColor whiteColor];
     }
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+
+    // NOT USE.
+//    static NSString *cellIdentifier = @"CalendorCell";
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+//                                      reuseIdentifier:cellIdentifier];
+//    }
+    
+    NSString *str = [NSString stringWithFormat:@"%d/%d/%d",
+                     dateComp.year,
+                     dateComp.month,
+                     indexPath.row + 1];
+    NSLog(@"cell touched. section:%d , row:%d" , indexPath.section , indexPath.row);
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str
+                                                    message:@"スケジュールを入力してくれい"
+                                                   delegate:self
+                                          cancelButtonTitle:@"キャンセル"
+                                          otherButtonTitles:@"OK", nil];
+    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
+    [alert show];
+}
+
+#pragma mark - AlertView Delegate
+
+-(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1){
+        NSLog(@"%@" , [alertView textFieldAtIndex:0].text);
+        self.schedule[alertView.title] = [alertView textFieldAtIndex:0].text;
+        [self insertNewObjectWithDate:alertView.title message:[alertView textFieldAtIndex:0].text];
+        self.fetchedResultsController = nil;
+        [self setScheduleFromCoreData];
+    }
+    NSLog(@"%@" , self.schedule);
+    [self.tableView reloadData];
+}
+
+#pragma mark - Shake Gesture
+
+- (BOOL)canBecomeFirstResponder
+{
+    return YES;
+}
+
+- (void)motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    NSLog(@"motionBegan");
+}
+
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    NSLog(@"motionEnded");
+    [self addButtonTouched:self.navigationItem.leftBarButtonItem];
+}
+
+- (void)motionCancelled:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    NSLog(@"motionCancelled");
+}
+
+#pragma mark - ButtonClicked Event Methods
 
 - (void)addButtonTouched:(id)sender
 {
@@ -125,33 +199,7 @@
     [self insertNewObject:button];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    // NOT USE.
-//    static NSString *cellIdentifier = @"Cell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-//                                      reuseIdentifier:cellIdentifier];
-//    }
-    
-    NSString *str = [NSString stringWithFormat:@"%d/%d/%d",
-                     dateComp.year,
-                     dateComp.month,
-                     indexPath.row + 1];
-    NSLog(@"cell touched. section:%d , row:%d" , indexPath.section , indexPath.row);
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str
-                                                    message:@"スケジュールを入力してくれい"
-                                                   delegate:self
-                                          cancelButtonTitle:@"キャンセル"
-                                          otherButtonTitles:@"OK", nil];
-    [alert setAlertViewStyle:UIAlertViewStylePlainTextInput];
-    [alert show];
-}
-
-#pragma - Core Data
+#pragma mark - Core Data
 
 - (void)insertNewObject:(id)sender
 {
@@ -238,18 +286,7 @@
     return _fetchedResultsController;
 }
 
--(void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex == 1){
-        NSLog(@"%@" , [alertView textFieldAtIndex:0].text);
-        self.schedule[alertView.title] = [alertView textFieldAtIndex:0].text;
-        [self insertNewObjectWithDate:alertView.title message:[alertView textFieldAtIndex:0].text];
-        self.fetchedResultsController = nil;
-        [self setScheduleFromCoreData];
-    }
-    NSLog(@"%@" , self.schedule);
-    [self.tableView reloadData];
-}
+#pragma mark - set Schedule Dictionary Method
 
 - (void)setScheduleFromCoreData
 {

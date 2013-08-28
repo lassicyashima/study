@@ -9,20 +9,16 @@
 /* Begin PBXBuildFile section */
 		0817D7BA17C4CC7A0097A5CB /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0817D7B917C4CC7A0097A5CB /* MainStoryboard.storyboard */; };
 		0817D7C017C4D0930097A5CB /* MyPopOverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0817D7BF17C4D0930097A5CB /* MyPopOverViewController.m */; };
-		084FB53017C3727700C8F053 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 084FB52F17C3727700C8F053 /* Default@2x.png */; };
 		089713F917C618E800A814F5 /* InputData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 089713F717C618E800A814F5 /* InputData.xcdatamodeld */; };
 		089713FF17C61C9900A814F5 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 089713FE17C61C9900A814F5 /* Schedule.m */; };
 		0897140117C61CF200A814F5 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0897140017C61CF200A814F5 /* CoreData.framework */; };
 		878FE2BE175F414D00B3AE0B /* CalenderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 878FE2BD175F414D00B3AE0B /* CalenderViewController.m */; };
-		879B90111761B75D001F1E87 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 879B90101761B75D001F1E87 /* Default-568h@2x.png */; };
-		879B901D1761BC09001F1E87 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 879B901C1761BC09001F1E87 /* Default@2x.png */; };
 		87DA71FF175C96A2001DB25B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87DA71FE175C96A2001DB25B /* UIKit.framework */; };
 		87DA7201175C96A2001DB25B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87DA7200175C96A2001DB25B /* Foundation.framework */; };
 		87DA7203175C96A2001DB25B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87DA7202175C96A2001DB25B /* CoreGraphics.framework */; };
 		87DA7209175C96A2001DB25B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 87DA7207175C96A2001DB25B /* InfoPlist.strings */; };
 		87DA720B175C96A2001DB25B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 87DA720A175C96A2001DB25B /* main.m */; };
 		87DA720F175C96A2001DB25B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87DA720E175C96A2001DB25B /* AppDelegate.m */; };
-		87DA7211175C96A2001DB25B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 87DA7210175C96A2001DB25B /* Default.png */; };
 		87DA7222175C96BE001DB25B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87DA7221175C96BE001DB25B /* MapKit.framework */; };
 		87DA7224175C96CA001DB25B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87DA7223175C96CA001DB25B /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
@@ -31,15 +27,12 @@
 		0817D7B917C4CC7A0097A5CB /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		0817D7BE17C4D0930097A5CB /* MyPopOverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyPopOverViewController.h; sourceTree = "<group>"; };
 		0817D7BF17C4D0930097A5CB /* MyPopOverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyPopOverViewController.m; sourceTree = "<group>"; };
-		084FB52F17C3727700C8F053 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		089713F817C618E800A814F5 /* InputData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = InputData.xcdatamodel; sourceTree = "<group>"; };
 		089713FD17C61C9900A814F5 /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Schedule.h; sourceTree = "<group>"; };
 		089713FE17C61C9900A814F5 /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Schedule.m; sourceTree = "<group>"; };
 		0897140017C61CF200A814F5 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		878FE2BC175F414D00B3AE0B /* CalenderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalenderViewController.h; sourceTree = "<group>"; };
 		878FE2BD175F414D00B3AE0B /* CalenderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalenderViewController.m; sourceTree = "<group>"; };
-		879B90101761B75D001F1E87 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		879B901C1761BC09001F1E87 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		87DA71FB175C96A2001DB25B /* calendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = calendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87DA71FE175C96A2001DB25B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		87DA7200175C96A2001DB25B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -50,7 +43,6 @@
 		87DA720C175C96A2001DB25B /* calendar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "calendar-Prefix.pch"; sourceTree = "<group>"; };
 		87DA720D175C96A2001DB25B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		87DA720E175C96A2001DB25B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		87DA7210175C96A2001DB25B /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		87DA7221175C96BE001DB25B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		87DA7223175C96CA001DB25B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -75,7 +67,6 @@
 		87DA71F2175C96A2001DB25B = {
 			isa = PBXGroup;
 			children = (
-				879B901C1761BC09001F1E87 /* Default@2x.png */,
 				87DA7204175C96A2001DB25B /* calendar */,
 				87DA71FD175C96A2001DB25B /* Frameworks */,
 				87DA71FC175C96A2001DB25B /* Products */,
@@ -116,7 +107,6 @@
 				0817D7BF17C4D0930097A5CB /* MyPopOverViewController.m */,
 				089713FD17C61C9900A814F5 /* Schedule.h */,
 				089713FE17C61C9900A814F5 /* Schedule.m */,
-				084FB52F17C3727700C8F053 /* Default@2x.png */,
 				87DA7205175C96A2001DB25B /* Supporting Files */,
 			);
 			path = calendar;
@@ -127,10 +117,8 @@
 			children = (
 				87DA7206175C96A2001DB25B /* calendar-Info.plist */,
 				87DA7207175C96A2001DB25B /* InfoPlist.strings */,
-				879B90101761B75D001F1E87 /* Default-568h@2x.png */,
 				87DA720A175C96A2001DB25B /* main.m */,
 				87DA720C175C96A2001DB25B /* calendar-Prefix.pch */,
-				87DA7210175C96A2001DB25B /* Default.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -187,10 +175,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				87DA7209175C96A2001DB25B /* InfoPlist.strings in Resources */,
-				87DA7211175C96A2001DB25B /* Default.png in Resources */,
-				879B90111761B75D001F1E87 /* Default-568h@2x.png in Resources */,
-				879B901D1761BC09001F1E87 /* Default@2x.png in Resources */,
-				084FB53017C3727700C8F053 /* Default@2x.png in Resources */,
 				0817D7BA17C4CC7A0097A5CB /* MainStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
