@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "MyPopOverViewController.h"
 
-@interface CalenderViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UINavigationBarDelegate , MyPopPverViewDelegate , NSFetchedResultsControllerDelegate>
+@interface CalenderViewController : UITableViewController<UITableViewDelegate,UITableViewDataSource,UINavigationControllerDelegate,UINavigationBarDelegate,MyPopPverViewDelegate,NSFetchedResultsControllerDelegate>
 
 @property (nonatomic,strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic,strong) NSFetchedResultsController *fetchedResultsController;

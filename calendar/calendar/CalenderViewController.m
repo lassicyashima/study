@@ -41,6 +41,7 @@
 
 - (void)viewDidLoad
 {
+    // ViewDidLoad is called Only Once on First.
     [super viewDidLoad];
     
     self.title = @"Schedole";
@@ -76,6 +77,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // indexPath has row and section.
     static NSString *cellIdentifier = @"CalendorCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
@@ -98,7 +100,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView
-  willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+  willDisplayCell:(UITableViewCell *)cell
+forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger day = indexPath.row + 1;
     if ([today isTodayWithMonth:[dateComp month] day:day]) {
@@ -127,6 +130,7 @@
                      dateComp.month,
                      indexPath.row + 1];
     NSLog(@"cell touched. section:%d , row:%d" , indexPath.section , indexPath.row);
+    NSLog(@"alertView title:%@" , str);
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:str
                                                     message:@"スケジュールを入力してくれい"
                                                    delegate:self
@@ -174,7 +178,7 @@
     NSLog(@"motionCancelled");
 }
 
-#pragma mark - ButtonClicked Event Methods
+#pragma mark - ButtonClicked Event Method
 
 - (void)addButtonTouched:(id)sender
 {
@@ -187,41 +191,20 @@
                                                animated:YES];
 }
 
+#pragma mark - MyPopOverViewContorollerDelegate Method
+
 - (void)popOverButtonTouched:(UIButton *)button
 {
-    NSLog(@"touched button:%@" , button);
+    NSLog(@"touched button:button%d"  , button.tag);
     [self.popController dismissPopoverAnimated:YES];
     
     [dateComp setMonth:button.tag];
     self.days = [calendar rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:[calendar dateFromComponents:dateComp]].length;
     [dateComp setDay:rand() % self.days];
     [self.tableView reloadData];
-    [self insertNewObject:button];
 }
 
 #pragma mark - Core Data
-
-- (void)insertNewObject:(id)sender
-{
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    Schedule *newSchedule = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    
-    // If appropriate, configure the new managed object.
-    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    newSchedule.created_time = [NSDate date];
-    newSchedule.date = [NSDate date];
-    newSchedule.action = @"決まった";
-    
-    // Save the context.
-    NSError *error = nil;
-    if (![context save:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-}
 
 - (void)insertNewObjectWithDate:(NSString *)dateString message:(NSString *)message
 {
@@ -230,8 +213,8 @@
     Schedule *newSchedule = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
     
     NSDateFormatter *inputDateFormatter = [[NSDateFormatter alloc] init];
-	[inputDateFormatter setDateFormat:@"yyyy/M/d"];
-	NSDate *inputDate = [inputDateFormatter dateFromString:dateString];
+    [inputDateFormatter setDateFormat:@"yyyy/M/d"];
+    NSDate *inputDate = [inputDateFormatter dateFromString:dateString];
     
     // If appropriate, configure the new managed object.
     // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.

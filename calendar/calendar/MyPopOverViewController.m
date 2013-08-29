@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad
 {
+    // ViewDidLoad is called Only Once on First.
     [super viewDidLoad];
     [self.button1 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchDown];
     [self.button2 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchDown];
@@ -39,6 +40,8 @@
     [self.button11 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchDown];
     [self.button12 addTarget:self action:@selector(buttonTouched:) forControlEvents:UIControlEventTouchDown];
 }
+
+#pragma mark - set Button Methods
 
 - (void)buttonTouched:(id)sender
 {
