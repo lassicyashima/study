@@ -59,12 +59,6 @@
     self.schedule = @{}.mutableCopy;
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    // ViewWillAppear is called before displaying.
-    // No action.
-}
-
 #pragma mark - TableView Dalegate and DataSouce
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
