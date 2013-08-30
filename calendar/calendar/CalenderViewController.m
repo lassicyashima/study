@@ -9,17 +9,18 @@
 #import "CalenderViewController.h"
 #import "Schedule.h"
 
+// This object hold a today.
 @interface Today : NSObject
 @property (nonatomic, assign) NSInteger month;
 @property (nonatomic, assign) NSInteger day;
 
-- (BOOL) isTodayWithMonth:(NSInteger)month day:(NSInteger)day;
+- (BOOL)isEqualToDateWithMonth:(NSInteger)month day:(NSInteger)day;
 
 @end
 
 @implementation Today
 
-- (BOOL)isTodayWithMonth:(NSInteger)month day:(NSInteger)day
+- (BOOL)isEqualToDateWithMonth:(NSInteger)month day:(NSInteger)day
 {
     return (self.month == month && self.day == day);
 }
@@ -44,7 +45,7 @@
     // ViewDidLoad is called Only Once on First.
     [super viewDidLoad];
     
-    self.title = @"Schedole";
+    self.title = @"スケジョール";
     NSDate *now = [NSDate date];
     calendar = [NSCalendar currentCalendar];
     dateComp = [calendar components:NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit
@@ -58,11 +59,17 @@
     self.schedule = @{}.mutableCopy;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    // ViewWillAppear is called before displaying.
+    // No action.
+}
+
 #pragma mark - TableView Dalegate and DataSouce
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [NSString stringWithFormat:@"%d月", [dateComp month]];
+    return [NSString stringWithFormat:@"%d月", self.days];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -95,6 +102,7 @@
                       dateComp.month,
                       day];
     actionLabel.text = self.schedule[dateLabel.text];
+    NSLog(@"set tableViewCells. date:%@ , action:%@" , dateLabel.text , actionLabel.text);
     
     return cell;
 }
@@ -104,26 +112,18 @@
 forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSInteger day = indexPath.row + 1;
-    if ([today isTodayWithMonth:[dateComp month] day:day]) {
+    if ([today isEqualToDateWithMonth:[dateComp month] day:day]) {
         UILabel *dateLabel   = (UILabel *)[cell viewWithTag:1];
         UILabel *actionLabel = (UILabel *)[cell viewWithTag:2];
-        dateLabel.textColor = [UIColor whiteColor];
+        dateLabel.textColor   = [UIColor whiteColor];
         actionLabel.textColor = [UIColor whiteColor];
-        cell.backgroundColor = [UIColor redColor];
+        cell.backgroundColor  = [UIColor redColor];
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-
-    // NOT USE.
-//    static NSString *cellIdentifier = @"CalendorCell";
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-//                                      reuseIdentifier:cellIdentifier];
-//    }
     
     NSString *str = [NSString stringWithFormat:@"%d/%d/%d",
                      dateComp.year,
