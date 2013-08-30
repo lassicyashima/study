@@ -63,7 +63,7 @@
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [NSString stringWithFormat:@"%d月", self.days];
+    return [NSString stringWithFormat:@"%d月", [dateComp month]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
